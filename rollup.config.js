@@ -3,7 +3,7 @@ import uglify from "rollup-plugin-uglify";
 
 export default {
   useStrict: true,
-  format: "cjs",
+  format: "umd",
   entry: "./index.js",
   moduleName: "History",
   plugins: [
