@@ -6,6 +6,7 @@ export default {
   format: "umd",
   entry: "./index.js",
   moduleName: "History",
+  sourceMap: true,
   plugins: [
     buble(),
     uglify({

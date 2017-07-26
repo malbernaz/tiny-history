@@ -40,7 +40,7 @@ export default class BrowserHistory {
     };
   }
 
-  createLocation(path = window.location, state) {
+  createLocation(path = location, state) {
     const newLocation = { state: state || null };
 
     let newURL;
@@ -48,7 +48,7 @@ export default class BrowserHistory {
       newURL = new URL(path);
     } else {
       const key = Math.random().toString(36).substr(2, 5);
-      newURL = new URL(path, window.location);
+      newURL = new URL(path, location);
       newLocation.key = key;
     }
 
