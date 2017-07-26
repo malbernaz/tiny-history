@@ -2,7 +2,7 @@ export default class BrowserHistory {
   constructor() {
     this.listeners = [];
     this.location = this.createLocation();
-    this.entries = [location];
+    this.entries = [this.location];
 
     this.go = index => history.go(index);
     this.back = () => history.back();
