@@ -60,7 +60,3 @@ typings/
 
 # mac
 .DS_Store
-
-# project
-dist
-
