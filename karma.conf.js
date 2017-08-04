@@ -3,47 +3,47 @@ const webpack = require("webpack");
 module.exports = config => {
   const customLaunchers = {
     sl_chrome: {
-      base: "saucelabs",
+      base: "SauceLabs",
       platform: "windows 10",
-      browsername: "chrome",
+      browserName: "chrome",
       version: "47.0"
     },
     sl_firefox: {
-      base: "saucelabs",
+      base: "SauceLabs",
       platform: "windows 10",
-      browsername: "firefox",
+      browserName: "firefox",
       version: "43.0"
     },
     sl_safari: {
-      base: "saucelabs",
+      base: "SauceLabs",
       platform: "os x 10.11",
-      browsername: "safari",
+      browserName: "safari",
       version: "9.0"
     },
     sl_mobilesafari8: {
-      base: "saucelabs",
+      base: "SauceLabs",
       platform: "os x 10.11",
-      browsername: "iphone",
+      browserName: "iphone",
       version: "7.1"
     },
     sl_mobilesafari9: {
-      base: "saucelabs",
+      base: "SauceLabs",
       platform: "ios",
-      browsername: "safari",
+      browserName: "safari",
       version: "8.1",
-      devicename: "iphone emulator"
+      deviceName: "iphone emulator"
     },
     sl_internetexplorer10: {
-      base: "saucelabs",
+      base: "SauceLabs",
       platform: "windows 8",
-      browsername: "internet explorer",
+      browserName: "internet explorer",
       version: "10.0"
     },
     sl_androidbrowser: {
-      base: "saucelabs",
-      browsername: "browser",
+      base: "SauceLabs",
+      browserName: "browser",
       platform: "android",
-      devicename: "android emulator",
+      deviceName: "android emulator",
       version: "4.4"
     }
   };
@@ -77,8 +77,8 @@ module.exports = config => {
   if (process.env.TRAVIS) {
     config.customLaunchers = customLaunchers;
     config.browsers = Object.keys(customLaunchers);
-    config.reporters = ["dots", "saucelabs"];
-    config.sauceLabs = {
+    config.reporters = ["dots", "SauceLabs"];
+    config.SauceLabs = {
       testName: "Web App Unit Tests",
       tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
       username: process.env.SAUCE_USERNAME,
