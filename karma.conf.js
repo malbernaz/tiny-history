@@ -44,7 +44,7 @@ module.exports = config => {
     }
   };
 
-  config.set({
+  const configuration = {
     browsers: ["ChromeHeadless"],
     frameworks: ["mocha"],
     reporters: ["mocha"],
@@ -68,13 +68,13 @@ module.exports = config => {
     webpackServer: {
       noInfo: true
     }
-  });
+  };
 
   if (process.env.TRAVIS) {
-    config.customLaunchers = customLaunchers;
-    config.browsers = Object.keys(customLaunchers);
-    config.reporters = ["dots", "saucelabs"];
-    config.SauceLabs = {
+    configuration.customLaunchers = customLaunchers;
+    configuration.browsers = Object.keys(customLaunchers);
+    configuration.reporters = ["dots", "saucelabs"];
+    configuration.SauceLabs = {
       testName: "Web App Unit Tests",
       tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
       username: process.env.SAUCE_USERNAME,
@@ -82,4 +82,6 @@ module.exports = config => {
       startConnect: false
     };
   }
+
+  config.set(configuration);
 };
