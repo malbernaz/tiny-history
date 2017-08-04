@@ -78,8 +78,10 @@ module.exports = config => {
     config.reporters = ["dots", "saucelabs"];
     config.sauceLabs = {
       testName: "Web App Unit Tests",
+      tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
       username: process.env.SAUCE_USERNAME,
-      accessKey: process.env.SAUCE_ACCESS_KEY
+      accessKey: process.env.SAUCE_ACCESS_KEY,
+      startConnect: false
     };
   }
 };
