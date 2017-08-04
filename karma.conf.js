@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 
 module.exports = config => {
-  const customlaunchers = {
+  const customLaunchers = {
     sl_chrome: {
       base: "saucelabs",
       platform: "windows 10",
