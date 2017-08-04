@@ -4,47 +4,43 @@ module.exports = config => {
   const customLaunchers = {
     sl_chrome: {
       base: "SauceLabs",
-      platform: "windows 10",
-      browserName: "chrome",
+      platform: "Windows 10",
+      browserName: "Chrome",
       version: "47.0"
     },
     sl_firefox: {
       base: "SauceLabs",
-      platform: "windows 10",
+      platform: "Windows 10",
       browserName: "firefox",
       version: "43.0"
     },
     sl_safari: {
       base: "SauceLabs",
-      platform: "os x 10.11",
-      browserName: "safari",
+      platform: "OS X 10.11",
+      browserName: "Safari",
       version: "9.0"
     },
     sl_mobilesafari8: {
       base: "SauceLabs",
-      platform: "os x 10.11",
-      browserName: "iphone",
-      version: "7.1"
-    },
-    sl_mobilesafari9: {
-      base: "SauceLabs",
-      platform: "ios",
-      browserName: "safari",
-      version: "8.1",
-      deviceName: "iphone emulator"
+      platformName: "iOS",
+      browserName: "Safari",
+      platformVersion: "8.1",
+      deviceName: "iPhone Simulator",
+      appiumVersion: "1.6.4"
     },
     sl_internetexplorer10: {
       base: "SauceLabs",
-      platform: "windows 8",
+      platform: "Windows 8",
       browserName: "internet explorer",
       version: "10.0"
     },
     sl_androidbrowser: {
       base: "SauceLabs",
-      browserName: "browser",
-      platform: "android",
-      deviceName: "android emulator",
-      version: "4.4"
+      browserName: "Browser",
+      platformName: "Android",
+      deviceName: "Android Emulator",
+      platformVersion: "4.4",
+      appiumVersion: "1.6.4"
     }
   };
 
