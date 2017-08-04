@@ -77,7 +77,9 @@ module.exports = config => {
     config.browsers = Object.keys(customLaunchers);
     config.reporters = ["dots", "saucelabs"];
     config.sauceLabs = {
-      testName: "Web App Unit Tests"
+      testName: "Web App Unit Tests",
+      username: process.env.SAUCE_USERNAME,
+      accessKey: process.env.SAUCE_ACCESS_KEY
     };
   }
 };
