@@ -77,7 +77,7 @@ module.exports = config => {
   if (process.env.TRAVIS) {
     config.customLaunchers = customLaunchers;
     config.browsers = Object.keys(customLaunchers);
-    config.reporters = ["dots", "SauceLabs"];
+    config.reporters = ["dots", "saucelabs"];
     config.SauceLabs = {
       testName: "Web App Unit Tests",
       tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
