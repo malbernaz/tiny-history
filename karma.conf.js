@@ -73,6 +73,7 @@ module.exports = config => {
   });
 
   if (process.env.TRAVIS) {
+    config.customLaunchers = customLaunchers;
     config.browsers = Object.keys(customLaunchers);
     config.reporters = ["dots", "saucelabs"];
     config.sauceLabs = {
