@@ -10,7 +10,7 @@ function lastCallArgs(spy) {
   return spy.calls.slice(-1)[0].arguments;
 }
 
-function sleep(time = 10) {
+function sleep(time = 20) {
   return new Promise(resolve => {
     setTimeout(() => resolve(), time);
   });
@@ -83,7 +83,7 @@ describe("history", () => {
 
         history.back();
 
-        return sleep(10).then(() => {
+        return sleep().then(() => {
           [{ pathname }, action] = lastCallArgs(listener);
           expect(action).toBe("POP");
           expect(pathname).toBe("/home");
@@ -218,7 +218,7 @@ describe("history", () => {
         expect(pathname).toBe("/home");
 
         history.back();
-        return sleep(10).then(() => {
+        return sleep().then(() => {
           [{ pathname }, action] = lastCallArgs(listener);
           expect(action).toBe("POP");
           expect(pathname).toBe("/");
@@ -241,7 +241,7 @@ describe("history", () => {
         expect(pathname).toBe("/home");
 
         history.back();
-        return sleep(10)
+        return sleep()
           .then(() => {
             [{ pathname }, action] = lastCallArgs(listener);
             expect(action).toBe("POP");
@@ -249,7 +249,7 @@ describe("history", () => {
 
             history.forward();
 
-            return sleep(10);
+            return sleep();
           })
           .then(() => {
             [{ pathname }, action] = lastCallArgs(listener);
@@ -274,7 +274,7 @@ describe("history", () => {
         expect(pathname).toBe("/home");
 
         history.go(-1);
-        return sleep(10)
+        return sleep()
           .then(() => {
             [{ pathname }, action] = lastCallArgs(listener);
             expect(action).toBe("POP");
@@ -282,7 +282,7 @@ describe("history", () => {
 
             history.go(1);
 
-            return sleep(10);
+            return sleep();
           })
           .then(() => {
             [{ pathname }, action] = lastCallArgs(listener);

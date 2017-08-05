@@ -15,7 +15,7 @@ module.exports = config => {
     sl_ie: {
       base: "SauceLabs",
       browserName: "internet explorer",
-      version: "11.0"
+      version: "10.0"
     },
     sl_safari: {
       base: "SauceLabs",
@@ -30,15 +30,15 @@ module.exports = config => {
       deviceName: "iPhone Simulator",
       browserName: "Safari",
       appiumVersion: "1.6.5"
+    },
+    sl_androidbrowser: {
+      base: "SauceLabs",
+      platformName: "Android",
+      platformVersion: "4.4",
+      deviceName: "Android GoogleAPI Emulator",
+      browserName: "Browser",
+      appiumVersion: "1.6.5"
     }
-    // sl_androidbrowser: {
-    //   base: "SauceLabs",
-    //   platformName: "Android",
-    //   platformVersion: "5.0",
-    //   deviceName: "Android Emulator",
-    //   browserName: "Browser",
-    //   appiumVersion: "1.6.5"
-    // }
   };
 
   const configuration = {
@@ -53,9 +53,7 @@ module.exports = config => {
     webpack: {
       devtool: "inline-source-map",
       module: {
-        rules: [
-          { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
-        ]
+        rules: [{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }]
       },
       plugins: [
         new webpack.DefinePlugin({
@@ -69,7 +67,6 @@ module.exports = config => {
   };
 
   if (process.env.TRAVIS) {
-    configuration.doctor = true;
     configuration.customLaunchers = customLaunchers;
     configuration.browsers = Object.keys(customLaunchers);
     configuration.reporters = ["dots", "saucelabs"];

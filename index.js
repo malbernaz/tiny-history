@@ -6,7 +6,7 @@ function createURL(path) {
     link.href = path || location.href;
 
     return {
-      pathname: link.pathname,
+      pathname: `/${!!path && !link.pathname ? location.pathname : link.pathname}`,
       search: link.search,
       hash: link.hash
     };
@@ -47,9 +47,7 @@ export default class BrowserHistory {
     }
 
     return () => {
-      this.listeners = this.listeners.filter(
-        (l, i) => i !== this.listeners.indexOf(listener)
-      );
+      this.listeners = this.listeners.filter((l, i) => i !== this.listeners.indexOf(listener));
 
       if (!this.listeners.length) {
         removeEventListener("popstate", this.handlePopState);
