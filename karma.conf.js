@@ -69,7 +69,7 @@ module.exports = config => {
     configuration.customLaunchers = customLaunchers;
     configuration.browsers = Object.keys(customLaunchers);
     configuration.reporters = ["dots", "saucelabs"];
-    configuration.SauceLabs = {
+    configuration.sauceLabs = {
       testName: "Cross Browser Testing",
       tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
       username: process.env.SAUCE_USERNAME,
