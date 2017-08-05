@@ -19,7 +19,6 @@ module.exports = config => {
     },
     sl_safari: {
       base: "SauceLabs",
-      platform: "OS X 10.11",
       browserName: "Safari",
       version: "9.0"
     },
@@ -35,7 +34,7 @@ module.exports = config => {
       base: "SauceLabs",
       platformName: "Android",
       platformVersion: "4.4",
-      deviceName: "Android GoogleAPI Emulator",
+      deviceName: "Android Emulator",
       browserName: "Browser",
       appiumVersion: "1.6.5"
     }
@@ -71,7 +70,7 @@ module.exports = config => {
     configuration.browsers = Object.keys(customLaunchers);
     configuration.reporters = ["dots", "saucelabs"];
     configuration.SauceLabs = {
-      testName: "Web App Unit Tests",
+      testName: "Cross Browser Testing",
       tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
       username: process.env.SAUCE_USERNAME,
       accessKey: process.env.SAUCE_ACCESS_KEY,

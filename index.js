@@ -1,12 +1,18 @@
 function createURL(path) {
   try {
-    return path ? new URL(path, location) : new URL(location);
+    const url = path ? new URL(path, location) : new URL(location);
+    if (!url.pathname) throw new Error();
+    return url;
   } catch (error) {
     const link = document.createElement("a");
     link.href = path || location.href;
+    const pathname = (!!path && !link.pathname ? location.pathname : link.pathname)
+      .split("/")
+      .filter(Boolean)
+      .join("/");
 
     return {
-      pathname: `/${!!path && !link.pathname ? location.pathname : link.pathname}`,
+      pathname: `/${pathname}`,
       search: link.search,
       hash: link.hash
     };

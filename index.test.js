@@ -10,7 +10,7 @@ function lastCallArgs(spy) {
   return spy.calls.slice(-1)[0].arguments;
 }
 
-function sleep(time = 20) {
+function sleep(time = 100) {
   return new Promise(resolve => {
     setTimeout(() => resolve(), time);
   });
