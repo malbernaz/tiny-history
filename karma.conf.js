@@ -68,19 +68,19 @@ module.exports = config => {
     }
   };
 
-  // if (process.env.TRAVIS) {
-  configuration.doctor = true;
-  configuration.customLaunchers = customLaunchers;
-  configuration.browsers = Object.keys(customLaunchers);
-  configuration.reporters = ["dots", "saucelabs"];
-  configuration.SauceLabs = {
-    testName: "Web App Unit Tests",
-    // tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
-    username: process.env.SAUCE_USERNAME,
-    accessKey: process.env.SAUCE_ACCESS_KEY,
-    startConnect: false
-  };
-  // }
+  if (process.env.TRAVIS) {
+    configuration.doctor = true;
+    configuration.customLaunchers = customLaunchers;
+    configuration.browsers = Object.keys(customLaunchers);
+    configuration.reporters = ["dots", "saucelabs"];
+    configuration.SauceLabs = {
+      testName: "Web App Unit Tests",
+      tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
+      username: process.env.SAUCE_USERNAME,
+      accessKey: process.env.SAUCE_ACCESS_KEY,
+      startConnect: false
+    };
+  }
 
   config.set(configuration);
 };
