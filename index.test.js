@@ -1,3 +1,7 @@
+import PromisePolyfill from "promise-polyfill";
+
+window.Promise = window.Promise || PromisePolyfill;
+
 import expect, { createSpy } from "expect";
 
 import History from ".";

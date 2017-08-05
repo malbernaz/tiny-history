@@ -1,3 +1,18 @@
+function createURL(path) {
+  try {
+    return path ? new URL(path, location) : new URL(location);
+  } catch (error) {
+    const link = document.createElement("a");
+    link.href = path || location.href;
+
+    return {
+      pathname: link.pathname,
+      search: link.search,
+      hash: link.hash
+    };
+  }
+}
+
 export default class BrowserHistory {
   constructor() {
     this.listeners = [];
@@ -12,6 +27,8 @@ export default class BrowserHistory {
       this.location = state || this.entries[0];
       this.listeners.forEach(listener => listener(this.location, "POP"));
     };
+
+    this.firstLocation = true;
   }
 
   get length() {
@@ -40,15 +57,15 @@ export default class BrowserHistory {
     };
   }
 
-  createLocation(path = location, state) {
+  createLocation(path, state) {
     const newLocation = { state: state || null };
 
     let newURL;
-    if (path instanceof Location) {
-      newURL = new URL(path);
+    if (path === undefined) {
+      newURL = createURL();
     } else {
       const key = Math.random().toString(36).substr(2, 5);
-      newURL = new URL(path, location);
+      newURL = createURL(path);
       newLocation.key = key;
     }
 
