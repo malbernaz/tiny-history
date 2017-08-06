@@ -3,7 +3,6 @@ import uglify from "rollup-plugin-uglify";
 
 export default {
   useStrict: true,
-  format: "umd",
   entry: "./index.js",
   moduleName: "History",
   sourceMap: true,
@@ -13,8 +12,7 @@ export default {
       compress: {
         unsafe: true,
         dead_code: true,
-        pure_getters: true,
-        pure_funcs: ["_classCallCheck"]
+        pure_getters: true
       }
     })
   ]

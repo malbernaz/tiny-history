@@ -81,7 +81,7 @@ describe("history", () => {
         expect(action).toBe("PUSH");
         expect(pathname).toBe("/home");
 
-        history.back();
+        history.goBack();
 
         return sleep().then(() => {
           [{ pathname }, action] = lastCallArgs(listener);
@@ -217,7 +217,7 @@ describe("history", () => {
         expect(action).toBe("PUSH");
         expect(pathname).toBe("/home");
 
-        history.back();
+        history.goBack();
         return sleep().then(() => {
           [{ pathname }, action] = lastCallArgs(listener);
           expect(action).toBe("POP");
@@ -240,14 +240,14 @@ describe("history", () => {
         expect(action).toBe("PUSH");
         expect(pathname).toBe("/home");
 
-        history.back();
+        history.goBack();
         return sleep()
           .then(() => {
             [{ pathname }, action] = lastCallArgs(listener);
             expect(action).toBe("POP");
             expect(pathname).toBe("/");
 
-            history.forward();
+            history.goForward();
 
             return sleep();
           })

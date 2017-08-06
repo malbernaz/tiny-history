@@ -1,29 +1,40 @@
-# tiny-history
-
-[![Build Status](https://travis-ci.org/malbernaz/tiny-history.svg?branch=master)](https://travis-ci.org/malbernaz/tiny-history) [![Build Status](https://saucelabs.com/buildstatus/malbernaz)](https://saucelabs.com/beta/builds/126cf589faff497d998c4bb515345011)
+# tiny-history [![Build Status](https://travis-ci.org/malbernaz/tiny-history.svg?branch=master)](https://travis-ci.org/malbernaz/tiny-history) [![Build Status](https://saucelabs.com/buildstatus/malbernaz)](https://saucelabs.com/beta/builds/126cf589faff497d998c4bb515345011)
 
 [![Build Status](https://saucelabs.com/browser-matrix/malbernaz.svg)](https://saucelabs.com/beta/builds/126cf589faff497d998c4bb515345011)
 
-A simple wrapper around the browser history api. It was inspired by and to some extent it mimics the behaviour of [history](https://github.com/ReactTraining/history), a package created by the same folks that made [react-router](https://github.com/ReactTraining/react-router). The main differences from it is that tiny-history doesn't normalize paths and basename is currently not supported.
+tiny-history is a simple wrapper around the browser history api. It was inspired by and to some extent it mimics the behaviour of [history](https://github.com/ReactTraining/history), a package created by the same folks that made [react-router](https://github.com/ReactTraining/react-router).
+
+The main differences from it are that tiny-history doesn't normalize paths and basename and trasitions blocking are not supported.
+
+## Why to use this
+
+tiny-history's main selling point is it's size (800B minified and gzipped).
 
 ## Usage
 
 ```js
-import History from "tiny-history":
+import TinyHistory from "tiny-history":
 
-const history = new History();
+const history = new TinyHistory();
+
+// or
+
+import { createBrowserHistory } from "tiny-history":
+
+const history = createBrowserHistory();
+
 
 function doSomething(location, action) {
   /* do something */
 }
 
-// push a listener for route transitions
+// register a listener for route transitions
 const unlisten = history.listen(doSomething);
 
 // push a new route
 history.push("pushed");
 
-// replace a new route
+// replace a route
 history.replace("replaced");
 
 // transition to the previous route
@@ -35,9 +46,16 @@ history.forward();
 // transition to an entry of the history based on the index passed
 history.go(-1);
 
-// history.listen returns a callback that detatches the listener passed
+// history.listen returns a callback that detaches the listener passed to it
 unlisten();
 ```
 
+A UMD build is also available on [unpkg](https://unpkg.com):
+
+```html
+<script src="https://unpkg.com/tiny-history/tiny-history.js"></script>
+```
+
 ## LICENSE
+
 [MIT](https://github.com/malbernaz/tiny-history/blob/master/LICENSE)
