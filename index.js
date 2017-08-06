@@ -7,8 +7,8 @@ export default class TinyHistory {
     this.entries = [this.location];
 
     this.go = index => history.go(index);
-    this.goBack = () => history.back();
-    this.goForward = () => history.forward();
+    this.back = () => history.back();
+    this.forward = () => history.forward();
 
     this.handlePopState = ({ state }) => {
       this.location = state || this.entries[0];
@@ -56,8 +56,4 @@ export default class TinyHistory {
     history.replaceState(this.location, null, path);
     this.listeners.forEach(listener => listener(this.location, "REPLACE"));
   }
-}
-
-export function createBrowserHistory() {
-  return new TinyHistory();
 }
