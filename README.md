@@ -17,13 +17,6 @@ import TinyHistory from "tiny-history":
 
 const history = new TinyHistory();
 
-// or
-
-import { createBrowserHistory } from "tiny-history":
-
-const history = createBrowserHistory();
-
-
 function doSomething(location, action) {
   /* do something */
 }
