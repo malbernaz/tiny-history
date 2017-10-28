@@ -1,23 +1,17 @@
-function createURL(path) {
-  try {
-    const url = path ? new URL(path, location) : new URL(location);
-    if (!url.pathname) throw new Error();
-    return url;
-  } catch (error) {
-    const link = document.createElement("a");
-    link.href = path || location.href;
+function parseURL(href) {
+  const link = document.createElement("a");
+  link.href = href;
 
-    const pathname = (!!path && !link.pathname ? location.pathname : link.pathname)
-      .split("/")
-      .filter(Boolean)
-      .join("/");
+  const pathname = (link.pathname || location.pathname)
+    .split("/")
+    .filter(Boolean)
+    .join("/");
 
-    return {
-      pathname: `/${pathname}`,
-      search: link.search,
-      hash: link.hash
-    };
-  }
+  return {
+    pathname: `/${pathname}`,
+    search: link.search,
+    hash: link.hash
+  };
 }
 
 function createLocation(path, state) {
@@ -25,12 +19,12 @@ function createLocation(path, state) {
 
   let newURL;
   if (path === undefined) {
-    newURL = createURL();
+    newURL = parseURL(location.href);
   } else {
     const key = Math.random()
       .toString(36)
       .substr(2, 5);
-    newURL = createURL(path);
+    newURL = parseURL(path);
     newLocation.key = key;
   }
 
