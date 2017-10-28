@@ -1,17 +1,23 @@
-function createURL(href) {
-  const link = document.createElement("a");
-  link.href = href;
+function createURL(path) {
+  try {
+    const url = path ? new URL(path, location) : new URL(location);
+    if (!url.pathname) throw new Error();
+    return url;
+  } catch (error) {
+    const link = document.createElement("a");
+    link.href = path || location.href;
 
-  const pathname = link.pathname
-    .split("/")
-    .filter(Boolean)
-    .join("/");
+    const pathname = (!!path && !link.pathname ? location.pathname : link.pathname)
+      .split("/")
+      .filter(Boolean)
+      .join("/");
 
-  return {
-    pathname: `/${pathname}`,
-    search: link.search,
-    hash: link.hash
-  };
+    return {
+      pathname: `/${pathname}`,
+      search: link.search,
+      hash: link.hash
+    };
+  }
 }
 
 function createLocation(path, state) {
@@ -19,7 +25,7 @@ function createLocation(path, state) {
 
   let newURL;
   if (path === undefined) {
-    newURL = createURL(location.href);
+    newURL = createURL();
   } else {
     const key = Math.random()
       .toString(36)
