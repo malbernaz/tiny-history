@@ -50,7 +50,7 @@ Brower builds are also available on [unpkg](https://unpkg.com):
 <script src=https://unpkg.com/tiny-history/tiny-history.js></script>
 
 <!-- esm -->
-<script type=module src=https://unpkg.com/tiny-history/tiny-history.js></script>
+<script type=module src=https://unpkg.com/tiny-history/tiny-history.esm.js></script>
 ```
 
 ## LICENSE
