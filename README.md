@@ -66,7 +66,7 @@ history.go(-1);
 unlisten();
 ```
 
-## How to use tiny-history to replace `history`'s `createBrowserHistory`
+## How to use tiny-history to replace history's `createBrowserHistory`
 
 ```js
 import createHistory from "tiny-history";
