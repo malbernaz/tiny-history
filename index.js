@@ -1,56 +1,43 @@
 let a = document.createElement("a");
 
-function parseURL(href) {
-  a.href = href;
-
-  let pathname = (a.pathname || location.pathname)
-    .split("/")
-    .filter(Boolean)
-    .join("/");
+function createLocation(path, state) {
+  a.href = path || location.href;
 
   return {
-    pathname: `/${pathname}`,
+    state: state || null,
+    pathname:
+      "/" +
+      (a.pathname || location.pathname)
+        .split("/")
+        .filter(Boolean)
+        .join("/"),
     search: a.search,
-    hash: a.hash
+    hash: a.hash,
+    key:
+      path &&
+      Math.random()
+        .toString(36)
+        .substr(2, 5)
   };
 }
 
-function createLocation(path, state) {
-  let newLocation = { state: state || null };
+export default function createHistory() {
+  let listeners = [],
+    location = createLocation(),
+    entries = [location],
+    action;
 
-  let newURL;
-  if (path === undefined) {
-    newURL = parseURL(location.href);
-  } else {
-    let key = Math.random()
-      .toString(36)
-      .substr(2, 5);
-    newURL = parseURL(path);
-    newLocation.key = key;
+  function callListeners() {
+    listeners.forEach(listener => listener(location, action));
   }
 
-  newLocation.pathname = newURL.pathname;
-  newLocation.search = newURL.search;
-  newLocation.hash = newURL.hash;
-
-  return newLocation;
-}
-
-export default function createHistory() {
-  let listeners = [];
-  let location = createLocation();
-  let entries = [location];
-
-  function handlePopState({ state }) {
-    location = state || entries[0];
-    listeners.forEach(listener => listener(location, "POP"));
+  function handlePopState(e) {
+    location = e.state || entries[0];
+    action = "POP";
+    callListeners();
   }
 
   function listen(listener) {
-    if (typeof listener !== "function") {
-      throw new Error("listener must be a function");
-    }
-
     listeners.push(listener);
 
     if (listeners.length === 1) {
@@ -58,7 +45,7 @@ export default function createHistory() {
     }
 
     return () => {
-      listeners = listeners.filter((l, i) => i !== listeners.indexOf(listener));
+      listeners.splice(listeners.indexOf(listener), 1);
 
       if (!listeners.length) {
         removeEventListener("popstate", handlePopState);
@@ -70,7 +57,8 @@ export default function createHistory() {
     location = createLocation(path, state);
     entries.push(location);
     history.pushState(location, null, path);
-    listeners.forEach(listener => listener(location, "PUSH"));
+    action = "PUSH";
+    callListeners();
   }
 
   function replace(path, state) {
@@ -78,11 +66,12 @@ export default function createHistory() {
     entries.pop();
     entries.push(location);
     history.replaceState(location, null, path);
-    listeners.forEach(listener => listener(location, "REPLACE"));
+    action = "REPLACE";
+    callListeners();
   }
 
   return {
-    go: index => history.go(index),
+    go: i => history.go(i),
     back: () => history.back(),
     forward: () => history.forward(),
     get length() {
@@ -90,6 +79,9 @@ export default function createHistory() {
     },
     get location() {
       return location;
+    },
+    get action() {
+      return action;
     },
     listen,
     push,
