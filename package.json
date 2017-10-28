@@ -1,12 +1,13 @@
 {
   "name": "tiny-history",
-  "version": "2.0.0",
-  "description": "A simple wrapper around the browser history api",
+  "version": "2.0.1",
+  "description": "A simple wrapper around the browser history API",
   "repository": "https://github.com/malbernaz/tiny-history.git",
   "author": "malbernaz <albernazmiguel@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/tiny-history.esm.js",
+  "browser": "dist/tiny-history.js",
   "scripts": {
     "test": "karma start --single-run",
     "test:watch": "karma start",
