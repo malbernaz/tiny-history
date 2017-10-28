@@ -4,7 +4,7 @@ window.Promise = window.Promise || PromisePolyfill;
 
 import expect, { createSpy } from "expect";
 
-import History from ".";
+import createHistory from ".";
 
 function lastCallArgs(spy) {
   return spy.calls.slice(-1)[0].arguments;
@@ -24,7 +24,7 @@ describe("history", () => {
   describe("default behaviour", () => {
     let history;
     beforeEach(() => {
-      history = new History();
+      history = createHistory();
     });
 
     describe("listen", () => {

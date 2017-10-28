@@ -1,21 +1,44 @@
-# tiny-history [![Build Status](https://travis-ci.org/malbernaz/tiny-history.svg?branch=master)](https://travis-ci.org/malbernaz/tiny-history) [![Build Status](https://saucelabs.com/buildstatus/malbernaz)](https://saucelabs.com/beta/builds/126cf589faff497d998c4bb515345011)
+# tiny-history [![npm version](https://badge.fury.io/js/tiny-history.svg)](https://badge.fury.io/js/tiny-history) [![Build Status](https://travis-ci.org/malbernaz/tiny-history.svg?branch=master)](https://travis-ci.org/malbernaz/tiny-history) [![Build Status](https://saucelabs.com/buildstatus/malbernaz)](https://saucelabs.com/beta/builds/126cf589faff497d998c4bb515345011) ![](http://img.badgesize.io/malbernaz/tiny-history/master/dist/tiny-history.js.svg?compression=gzip)
+
 
 [![Build Status](https://saucelabs.com/browser-matrix/malbernaz.svg)](https://saucelabs.com/beta/builds/126cf589faff497d998c4bb515345011)
 
-tiny-history is a simple wrapper around the browser history api. It was inspired by and to some extent it mimics the behaviour of [history](https://github.com/ReactTraining/history), a package created by the same folks that made [react-router](https://github.com/ReactTraining/react-router).
+tiny-history is a simple wrapper around the browser history API. To some extent it mimics the behaviour of [history](https://github.com/ReactTraining/history), a module created by the good folks from [React Training](https://reacttraining.com/). Main differences from it are:
 
-The main differences from it are that tiny-history doesn't normalize paths and basename and trasitions blocking are not supported.
+- doesn't normalize paths
+- basename is not supported
+- transitions blocking is not supported
 
 ## Why to use this
 
-tiny-history's main selling point is it's size (800B minified and gzipped).
+tiny-history's main selling point is it's size: ~500B minified and gzipped.
+
+## How to install
+
+```bash
+npm i tiny-history
+
+# or
+
+yarn add tiny-history
+```
+
+Browser builds are also available on [unpkg](https://unpkg.com):
+
+```html
+<!-- iife -->
+<script src=https://unpkg.com/tiny-history/tiny-history.js></script>
+
+<!-- esm -->
+<script type=module src=https://unpkg.com/tiny-history/tiny-history.esm.js></script>
+```
 
 ## Usage
 
 ```js
-import TinyHistory from "tiny-history":
+import createHistory from "tiny-history";
 
-const history = new TinyHistory();
+const history = createHistory();
 
 function doSomething(location, action) {
   /* do something */
@@ -43,10 +66,18 @@ history.go(-1);
 unlisten();
 ```
 
-A UMD build is also available on [unpkg](https://unpkg.com):
+## How to use tiny-history to replace `history`'s `createBrowserHistory`
 
-```html
-<script src="https://unpkg.com/tiny-history/tiny-history.js"></script>
+```js
+import createHistory from "tiny-history";
+
+const history = createHistory();
+
+history.goForward = history.forward;
+
+history.goBack = history.back;
+
+export default history;
 ```
 
 ## LICENSE
