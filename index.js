@@ -1,59 +1,97 @@
-import createLocation from "./createLocation";
+function createURL(href) {
+  const link = document.createElement("a");
+  link.href = href;
 
-export default class TinyHistory {
-  constructor() {
-    this.listeners = [];
-    this.location = createLocation();
-    this.entries = [this.location];
+  const pathname = link.pathname
+    .split("/")
+    .filter(Boolean)
+    .join("/");
 
-    this.go = index => history.go(index);
-    this.back = () => history.back();
-    this.forward = () => history.forward();
+  return {
+    pathname: `/${pathname}`,
+    search: link.search,
+    hash: link.hash
+  };
+}
 
-    this.handlePopState = ({ state }) => {
-      this.location = state || this.entries[0];
-      this.listeners.forEach(listener => listener(this.location, "POP"));
-    };
+function createLocation(path, state) {
+  const newLocation = { state: state || null };
 
-    this.firstLocation = true;
+  let newURL;
+  if (path === undefined) {
+    newURL = createURL(location.href);
+  } else {
+    const key = Math.random()
+      .toString(36)
+      .substr(2, 5);
+    newURL = createURL(path);
+    newLocation.key = key;
   }
 
-  get length() {
-    return this.entries.length;
+  newLocation.pathname = newURL.pathname;
+  newLocation.search = newURL.search;
+  newLocation.hash = newURL.hash;
+
+  return newLocation;
+}
+
+export default function createHistory() {
+  let listeners = [];
+  let location = createLocation();
+  let entries = [location];
+
+  function handlePopState({ state }) {
+    location = state || entries[0];
+    listeners.forEach(listener => listener(location, "POP"));
   }
 
-  listen(listener) {
+  function listen(listener) {
     if (typeof listener !== "function") {
       throw new Error("listener must be a function");
     }
 
-    this.listeners.push(listener);
+    listeners.push(listener);
 
-    if (this.listeners.length === 1) {
-      addEventListener("popstate", this.handlePopState, false);
+    if (listeners.length === 1) {
+      addEventListener("popstate", handlePopState, false);
     }
 
     return () => {
-      this.listeners = this.listeners.filter((l, i) => i !== this.listeners.indexOf(listener));
+      listeners = listeners.filter((l, i) => i !== listeners.indexOf(listener));
 
-      if (!this.listeners.length) {
-        removeEventListener("popstate", this.handlePopState);
+      if (!listeners.length) {
+        removeEventListener("popstate", handlePopState);
       }
     };
   }
 
-  push(path, state) {
-    this.location = createLocation(path, state);
-    this.entries.push(this.location);
-    history.pushState(this.location, null, path);
-    this.listeners.forEach(listener => listener(this.location, "PUSH"));
+  function push(path, state) {
+    location = createLocation(path, state);
+    entries.push(location);
+    history.pushState(location, null, path);
+    listeners.forEach(listener => listener(location, "PUSH"));
   }
 
-  replace(path, state) {
-    this.location = createLocation(path, state);
-    this.entries.pop();
-    this.entries.push(this.location);
-    history.replaceState(this.location, null, path);
-    this.listeners.forEach(listener => listener(this.location, "REPLACE"));
+  function replace(path, state) {
+    location = createLocation(path, state);
+    entries.pop();
+    entries.push(location);
+    history.replaceState(location, null, path);
+    listeners.forEach(listener => listener(location, "REPLACE"));
   }
+
+  return {
+    go: index => history.go(index),
+    back: () => history.back(),
+    forward: () => history.forward(),
+    get length() {
+      return entries.length;
+    },
+    get location() {
+      return location;
+    },
+    listen,
+    push,
+    replace
+  };
 }

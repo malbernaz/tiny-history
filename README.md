@@ -1,4 +1,4 @@
-# tiny-history [![Build Status](https://travis-ci.org/malbernaz/tiny-history.svg?branch=master)](https://travis-ci.org/malbernaz/tiny-history) [![Build Status](https://saucelabs.com/buildstatus/malbernaz)](https://saucelabs.com/beta/builds/126cf589faff497d998c4bb515345011)
+# tiny-history [![npm version](https://badge.fury.io/js/tiny-history.svg)](https://badge.fury.io/js/tiny-history) [![Build Status](https://travis-ci.org/malbernaz/tiny-history.svg?branch=master)](https://travis-ci.org/malbernaz/tiny-history) [![Build Status](https://saucelabs.com/buildstatus/malbernaz)](https://saucelabs.com/beta/builds/126cf589faff497d998c4bb515345011)
 
 [![Build Status](https://saucelabs.com/browser-matrix/malbernaz.svg)](https://saucelabs.com/beta/builds/126cf589faff497d998c4bb515345011)
 
