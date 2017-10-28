@@ -3,11 +3,11 @@
 
 [![Build Status](https://saucelabs.com/browser-matrix/malbernaz.svg)](https://saucelabs.com/beta/builds/126cf589faff497d998c4bb515345011)
 
-tiny-history is a simple wrapper around the browser history API. To some extent it mimics the behaviour of [history](https://github.com/ReactTraining/history), a module created by the good folks from [React Training](https://reacttraining.com/). Main differences from it are:
+tiny-history is a simple wrapper around the browser history API. To some extent it mimics the behaviour of [history](https://github.com/ReactTraining/history), a module created by the good folks from [React Training](https://reacttraining.com/). Main differences from it are that:
 
-- doesn't normalize paths
+- it doesn't normalize paths
 - basename is not supported
-- transitions blocking is not supported
+- blocking transitions is not supported
 
 ## Why to use this
 
