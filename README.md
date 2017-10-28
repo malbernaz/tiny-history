@@ -4,18 +4,18 @@
 
 tiny-history is a simple wrapper around the browser history api. It was inspired by and to some extent it mimics the behaviour of [history](https://github.com/ReactTraining/history), a package created by the same folks that made [react-router](https://github.com/ReactTraining/react-router).
 
-The main differences from it are that tiny-history doesn't normalize paths and basename and trasitions blocking are not supported.
+The main differences from it are that tiny-history doesn't normalize paths and basename and trasition blocking are not supported.
 
 ## Why to use this
 
-tiny-history's main selling point is it's size (800B minified and gzipped).
+tiny-history's main selling point is it's size (600B minified and gzipped).
 
 ## Usage
 
 ```js
-import TinyHistory from "tiny-history":
+import createHistory from "tiny-history":
 
-const history = new TinyHistory();
+const history = createHistory();
 
 function doSomething(location, action) {
   /* do something */
@@ -43,10 +43,14 @@ history.go(-1);
 unlisten();
 ```
 
-A UMD build is also available on [unpkg](https://unpkg.com):
+Brower builds are also available on [unpkg](https://unpkg.com):
 
 ```html
-<script src="https://unpkg.com/tiny-history/tiny-history.js"></script>
+<!-- iife -->
+<script src=https://unpkg.com/tiny-history/tiny-history.js></script>
+
+<!-- esm -->
+<script type=module src=https://unpkg.com/tiny-history/tiny-history.js></script>
 ```
 
 ## LICENSE

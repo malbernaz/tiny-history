@@ -1,11 +1,11 @@
 import buble from "rollup-plugin-buble";
-import uglify from "rollup-plugin-uglify";
+import uglify from "rollup-plugin-uglify-es";
 import filesize from "rollup-plugin-filesize";
 
 export default {
   strict: true,
   input: "./index.js",
-  name: "tiny-history",
+  name: "createHistory",
   sourcemap: true,
   plugins: [
     buble({

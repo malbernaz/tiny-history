@@ -1,27 +1,28 @@
-function parseURL(href) {
-  const link = document.createElement("a");
-  link.href = href;
+let a = document.createElement("a");
 
-  const pathname = (link.pathname || location.pathname)
+function parseURL(href) {
+  a.href = href;
+
+  let pathname = (a.pathname || location.pathname)
     .split("/")
     .filter(Boolean)
     .join("/");
 
   return {
     pathname: `/${pathname}`,
-    search: link.search,
-    hash: link.hash
+    search: a.search,
+    hash: a.hash
   };
 }
 
 function createLocation(path, state) {
-  const newLocation = { state: state || null };
+  let newLocation = { state: state || null };
 
   let newURL;
   if (path === undefined) {
     newURL = parseURL(location.href);
   } else {
-    const key = Math.random()
+    let key = Math.random()
       .toString(36)
       .substr(2, 5);
     newURL = parseURL(path);

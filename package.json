@@ -1,17 +1,21 @@
 {
   "name": "tiny-history",
-  "version": "1.2.2",
+  "version": "2.0.0",
   "description": "A simple wrapper around the browser history api",
   "repository": "https://github.com/malbernaz/tiny-history.git",
   "author": "malbernaz <albernazmiguel@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
+  "module": "dist/tiny-history.esm.js",
   "scripts": {
     "test": "karma start --single-run",
     "test:watch": "karma start",
-    "build": "npm run build:cjs && npm run build:umd",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:iife",
     "build:cjs": "rollup -c rollup.config.js --output.format cjs --output.file dist/index.js",
-    "build:umd": "rollup -c rollup.config.js --output.format umd --output.file dist/tiny-history.js",
+    "build:esm":
+      "rollup -c rollup.config.js --output.format es --output.file dist/tiny-history.esm.js",
+    "build:iife":
+      "rollup -c rollup.config.js --output.format iife --output.file dist/tiny-history.js",
     "prepare": "npm run build"
   },
   "devDependencies": {
@@ -32,7 +36,7 @@
     "rollup": "^0.50.0",
     "rollup-plugin-buble": "^0.16.0",
     "rollup-plugin-filesize": "^1.4.2",
-    "rollup-plugin-uglify": "^2.0.1",
+    "rollup-plugin-uglify-es": "^0.0.1",
     "webpack": "^3.4.0"
   }
 }
