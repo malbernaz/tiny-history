@@ -41,7 +41,7 @@ describe("history", () => {
   });
 
   describe("push a new path", () => {
-    it("calls change listeners with the new location", () => {
+    it("calls listeners with the new location", () => {
       expect(history.location.pathname).toBe("/");
 
       history.push("/home?the=query#the-hash");
@@ -58,7 +58,7 @@ describe("history", () => {
   });
 
   describe("push the same path", () => {
-    it("calls change listeners with the new location", () => {
+    it("calls listeners with the new location", () => {
       expect(history.location.pathname).toBe("/");
 
       history.push("/home");
@@ -84,7 +84,7 @@ describe("history", () => {
   });
 
   describe("push state", () => {
-    it("calls change listeners with the new location", () => {
+    it("calls listeners with the new location", () => {
       expect(history.location.pathname).toBe("/");
 
       history.push("/home?the=query#the-hash", { the: "state" });
@@ -102,7 +102,7 @@ describe("history", () => {
   });
 
   describe("push with no pathname", () => {
-    it("calls change listeners with the new location", () => {
+    it("calls listeners with the new location", () => {
       expect(history.location.pathname).toBe("/");
 
       history.push("/home?the=query#the-hash");
@@ -128,7 +128,7 @@ describe("history", () => {
   });
 
   describe("replace a new path", () => {
-    it("calls change listeners with the new location", () => {
+    it("calls listeners with the new location", () => {
       expect(history.location.pathname).toBe("/");
 
       history.replace("/home?the=query#the-hash");
@@ -145,7 +145,7 @@ describe("history", () => {
   });
 
   describe("replace the same path", () => {
-    it("calls change listeners with the new location", () => {
+    it("calls listeners with the new location", () => {
       expect(history.location.pathname).toBe("/");
 
       history.replace("/home");
@@ -163,7 +163,7 @@ describe("history", () => {
   });
 
   describe("replace state", () => {
-    it("calls change listeners with the new location", () => {
+    it("calls listeners with the new location", () => {
       expect(history.location.pathname).toBe("/");
 
       history.replace("/home?the=query#the-hash", { the: "state" });
@@ -181,7 +181,7 @@ describe("history", () => {
   });
 
   describe("go back", () => {
-    it("calls change listeners with the previous location", () => {
+    it("calls listeners with the previous location", () => {
       expect(history.location.pathname).toBe("/");
 
       history.push("/home");
@@ -201,7 +201,7 @@ describe("history", () => {
   });
 
   describe("go forward", () => {
-    it("calls change listeners with the next location", () => {
+    it("calls listeners with the next location", () => {
       expect(history.location.pathname).toBe("/");
 
       history.push("/home");
@@ -231,7 +231,7 @@ describe("history", () => {
   });
 
   describe("go to index", () => {
-    it("calls change listeners with the given an index of an entry", () => {
+    it("calls listeners with the given an index of an entry", () => {
       expect(history.location.pathname).toBe("/");
 
       history.push("/home");

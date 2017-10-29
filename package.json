@@ -1,6 +1,6 @@
 {
   "name": "tiny-history",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A simple wrapper around the browser history API",
   "repository": "https://github.com/malbernaz/tiny-history.git",
   "author": "malbernaz <albernazmiguel@gmail.com>",

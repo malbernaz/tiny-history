@@ -37,43 +37,7 @@ export default function createHistory() {
     callListeners();
   }
 
-  function listen(listener) {
-    listeners.push(listener);
-
-    if (listeners.length === 1) {
-      addEventListener("popstate", handlePopState, false);
-    }
-
-    return () => {
-      listeners.splice(listeners.indexOf(listener), 1);
-
-      if (!listeners.length) {
-        removeEventListener("popstate", handlePopState);
-      }
-    };
-  }
-
-  function push(path, state) {
-    location = createLocation(path, state);
-    entries.push(location);
-    history.pushState(location, null, path);
-    action = "PUSH";
-    callListeners();
-  }
-
-  function replace(path, state) {
-    location = createLocation(path, state);
-    entries.pop();
-    entries.push(location);
-    history.replaceState(location, null, path);
-    action = "REPLACE";
-    callListeners();
-  }
-
   return {
-    go: i => history.go(i),
-    back: () => history.back(),
-    forward: () => history.forward(),
     get length() {
       return entries.length;
     },
@@ -83,8 +47,44 @@ export default function createHistory() {
     get action() {
       return action;
     },
-    listen,
-    push,
-    replace
+    listen(listener) {
+      listeners.push(listener);
+
+      if (listeners.length === 1) {
+        addEventListener("popstate", handlePopState, false);
+      }
+
+      return () => {
+        listeners.splice(listeners.indexOf(listener), 1);
+
+        if (!listeners.length) {
+          removeEventListener("popstate", handlePopState);
+        }
+      };
+    },
+    push(path, state) {
+      location = createLocation(path, state);
+      entries.push(location);
+      history.pushState(location, null, path);
+      action = "PUSH";
+      callListeners();
+    },
+    replace(path, state) {
+      location = createLocation(path, state);
+      entries.pop();
+      entries.push(location);
+      history.replaceState(location, null, path);
+      action = "REPLACE";
+      callListeners();
+    },
+    go(i) {
+      history.go(i);
+    },
+    back() {
+      history.back();
+    },
+    forward() {
+      history.forward();
+    }
   };
 }
