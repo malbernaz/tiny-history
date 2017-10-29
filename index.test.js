@@ -17,17 +17,17 @@ function sleep(time = 100) {
 }
 
 describe("history", () => {
-  let history;
+  let history, listener, unlisten;
   beforeEach(() => {
     window.history.replaceState(null, null, "/");
+
     history = createHistory();
+    listener = createSpy();
+    unlisten = history.listen(listener);
   });
 
   describe("listen", () => {
     it("does not immediately call listeners", () => {
-      const listener = createSpy();
-      const unlisten = history.listen(listener);
-
       expect(listener.calls.length).toBe(0);
 
       unlisten();
@@ -42,9 +42,6 @@ describe("history", () => {
 
   describe("push a new path", () => {
     it("calls change listeners with the new location", () => {
-      const listener = createSpy();
-      const unlisten = history.listen(listener);
-
       expect(history.location.pathname).toBe("/");
 
       history.push("/home?the=query#the-hash");
@@ -62,9 +59,6 @@ describe("history", () => {
 
   describe("push the same path", () => {
     it("calls change listeners with the new location", () => {
-      const listener = createSpy();
-      const unlisten = history.listen(listener);
-
       expect(history.location.pathname).toBe("/");
 
       history.push("/home");
@@ -91,9 +85,6 @@ describe("history", () => {
 
   describe("push state", () => {
     it("calls change listeners with the new location", () => {
-      const listener = createSpy();
-      const unlisten = history.listen(listener);
-
       expect(history.location.pathname).toBe("/");
 
       history.push("/home?the=query#the-hash", { the: "state" });
@@ -112,9 +103,6 @@ describe("history", () => {
 
   describe("push with no pathname", () => {
     it("calls change listeners with the new location", () => {
-      const listener = createSpy();
-      const unlisten = history.listen(listener);
-
       expect(history.location.pathname).toBe("/");
 
       history.push("/home?the=query#the-hash");
@@ -141,9 +129,6 @@ describe("history", () => {
 
   describe("replace a new path", () => {
     it("calls change listeners with the new location", () => {
-      const listener = createSpy();
-      const unlisten = history.listen(listener);
-
       expect(history.location.pathname).toBe("/");
 
       history.replace("/home?the=query#the-hash");
@@ -161,9 +146,6 @@ describe("history", () => {
 
   describe("replace the same path", () => {
     it("calls change listeners with the new location", () => {
-      const listener = createSpy();
-      const unlisten = history.listen(listener);
-
       expect(history.location.pathname).toBe("/");
 
       history.replace("/home");
@@ -182,9 +164,6 @@ describe("history", () => {
 
   describe("replace state", () => {
     it("calls change listeners with the new location", () => {
-      const listener = createSpy();
-      const unlisten = history.listen(listener);
-
       expect(history.location.pathname).toBe("/");
 
       history.replace("/home?the=query#the-hash", { the: "state" });
@@ -203,9 +182,6 @@ describe("history", () => {
 
   describe("go back", () => {
     it("calls change listeners with the previous location", () => {
-      const listener = createSpy();
-      const unlisten = history.listen(listener);
-
       expect(history.location.pathname).toBe("/");
 
       history.push("/home");
@@ -226,9 +202,6 @@ describe("history", () => {
 
   describe("go forward", () => {
     it("calls change listeners with the next location", () => {
-      const listener = createSpy();
-      const unlisten = history.listen(listener);
-
       expect(history.location.pathname).toBe("/");
 
       history.push("/home");
@@ -259,9 +232,6 @@ describe("history", () => {
 
   describe("go to index", () => {
     it("calls change listeners with the given an index of an entry", () => {
-      const listener = createSpy();
-      const unlisten = history.listen(listener);
-
       expect(history.location.pathname).toBe("/");
 
       history.push("/home");
