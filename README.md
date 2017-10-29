@@ -27,10 +27,13 @@ Browser builds are also available on [unpkg](https://unpkg.com):
 
 ```html
 <!-- iife -->
-<script src=https://unpkg.com/tiny-history/tiny-history.js></script>
+<script src=https://unpkg.com/tiny-history/dist/tiny-history.js></script>
 
 <!-- esm -->
-<script type=module src=https://unpkg.com/tiny-history/tiny-history.esm.js></script>
+<script type=module>
+  import createHistory from "https://unpkg.com/tiny-history/dist/tiny-history.esm.js";
+  /* ... */
+</script>
 ```
 
 ## Usage
