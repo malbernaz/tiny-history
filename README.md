@@ -5,9 +5,8 @@
 
 tiny-history is a simple wrapper around the browser history API. To some extent it mimics the behaviour of [history](https://github.com/ReactTraining/history), a module created by the good folks from [React Training](https://reacttraining.com/). Main differences from it are that:
 
-- it doesn't normalize paths
-- basename is not supported
-- blocking transitions is not supported
+- basename is not supported;
+- blocking transitions is not supported;
 
 ## Why to use this
 
