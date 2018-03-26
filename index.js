@@ -1,6 +1,7 @@
-let a = document.createElement("a");
+let a;
 
 function createLocation(path, state) {
+  a = a || document.createElement("a");
   a.href = path || location.href;
 
   return {
