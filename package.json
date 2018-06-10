@@ -1,6 +1,6 @@
 {
   "name": "tiny-history",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "A simple wrapper around the browser history API",
   "repository": "https://github.com/malbernaz/tiny-history.git",
   "author": "malbernaz <albernazmiguel@gmail.com>",
@@ -12,10 +12,8 @@
     "test:watch": "karma start",
     "build": "npm run build:cjs && npm run build:esm && npm run build:iife",
     "build:cjs": "rollup -c rollup.config.js --output.format cjs --output.file dist/index.js",
-    "build:esm":
-      "rollup -c rollup.config.js --output.format es --output.file dist/tiny-history.esm.js",
-    "build:iife":
-      "rollup -c rollup.config.js --output.format iife --output.file dist/tiny-history.js",
+    "build:esm": "rollup -c rollup.config.js --output.format es --output.file dist/tiny-history.esm.js",
+    "build:iife": "rollup -c rollup.config.js --output.format iife --output.file dist/tiny-history.js",
     "prepare": "npm run build"
   },
   "devDependencies": {
