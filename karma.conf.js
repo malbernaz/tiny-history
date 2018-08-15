@@ -21,22 +21,6 @@ module.exports = config => {
       base: "SauceLabs",
       browserName: "Safari",
       version: "9.0"
-    },
-    sl_mobilesafari: {
-      base: "SauceLabs",
-      platformName: "iOS",
-      platformVersion: "8.1",
-      deviceName: "iPhone Simulator",
-      browserName: "Safari",
-      appiumVersion: "1.6.5"
-    },
-    sl_androidbrowser: {
-      base: "SauceLabs",
-      platformName: "Android",
-      platformVersion: "4.4",
-      deviceName: "Android Emulator",
-      browserName: "Browser",
-      appiumVersion: "1.6.5"
     }
   };
 
